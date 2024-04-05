@@ -61,6 +61,10 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
+
+
+   // implementation("com.google.android.material:material:1.5.0")
+
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     //for gif

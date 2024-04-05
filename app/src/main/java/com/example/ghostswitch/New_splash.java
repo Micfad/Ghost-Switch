@@ -16,7 +16,7 @@ public class New_splash extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(New_splash.this, MainActivity.class);
+                Intent i = new Intent(New_splash.this, Connect_View.class);
                 startActivity(i);
                 finish();
 
