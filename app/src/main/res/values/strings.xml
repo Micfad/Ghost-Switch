@@ -2,5 +2,7 @@
     <string name="app_name">Ghost Switch</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="string_one">Check The Device Label for it ip address</string>
+    <string name="string_one">Enter your smart home wifi credentials</string>
+    <string name="string_two"></string>
+
 </resources>

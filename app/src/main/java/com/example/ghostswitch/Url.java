@@ -51,6 +51,8 @@ public class Url extends Fragment {
 
        // return inflater.inflate(R.layout.fragment_url, container, false);
         final View view = inflater.inflate(R.layout.fragment_url, container, false);
+
+
         // Initialize UI elements
         url_errorrMsg = view.findViewById(R.id.number_error);
         urlEdt = view.findViewById(R.id.Urleditext);
@@ -70,6 +72,7 @@ public class Url extends Fragment {
             }
 
         });
+
 
         // Execute network request in a background thread
         // Set OnClickListener on the "Next" button
@@ -135,7 +138,13 @@ public class Url extends Fragment {
             }
         });
 
+
+
         return view;
+
+
+
+
 
 
 
@@ -211,8 +220,8 @@ public class Url extends Fragment {
                                     // Navigate to another fragment
                                     //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.urlcontainer, new Node_ssid_forms()).commit();
 
-                                    // Call a function to save the IP address in the database
-                                    saveIpAddressToDatabase();
+                                    // Call a function to save the IP address in a diffrnt table in the database
+                                    //saveIpAddressToDatabase();
                                 }
 
                              }
@@ -239,6 +248,8 @@ public class Url extends Fragment {
 
 
             }
+
+
         }
 
         private void saveIpAddressToDatabase() {
@@ -269,7 +280,46 @@ public class Url extends Fragment {
             db.close();
         }
 
+        private void saveOncIpAddressToDatabase() {
+            // Get the IP address from the EditText
+            String ipAddress = urlEdt.getText().toString();
+
+            // Open or create the database
+            MyDBHelper dbHelper = new MyDBHelper(getActivity());
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+            try {
+                // Create a ContentValues object to store the data
+                ContentValues values = new ContentValues();
+                values.put(MyDBHelper.COLUMN_HOME_IP_ADDRESS, ipAddress);
+
+                // Insert the data into the TABLE_IP_ADDRESS table
+                long newRowId = db.insert(MyDBHelper.TABLE_IP_ADDRESS, null, values);
+
+                // Check if the data was inserted successfully
+                if (newRowId != -1) {
+                    // Data inserted successfully
+                    // You can perform any additional actions here if needed
+                } else {
+                    // Failed to insert data
+                    // Handle the error accordingly
+                }
+            } catch (Exception e) {
+                // Handle any exceptions that might occur during the insertion process
+                e.printStackTrace();
+            } finally {
+                // Close the database connection
+                db.close();
+            }
+        }
+
+
+
+
+
     }
+
+
 
 
 

@@ -70,6 +70,9 @@ dependencies {
     //for gif
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.7")
 
+    //helps to send data to ESP device via HTTP POST request
+    implementation ("com.android.volley:volley:1.2.1")
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
