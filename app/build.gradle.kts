@@ -73,6 +73,9 @@ dependencies {
     //helps to send data to ESP device via HTTP POST request
     implementation ("com.android.volley:volley:1.2.1")
 
+    //added
+    implementation ("com.android.support:support-annotations:28.0.0")
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

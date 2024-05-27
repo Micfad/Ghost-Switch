@@ -5,4 +5,24 @@
     <string name="string_one">Enter your smart home wifi credentials</string>
     <string name="string_two"></string>
 
+    <string name="rename_type">Rename</string>
+    <string name="add_Switches">Add Switches</string>
+    <string name="add_To_Home">Add To Home</string>
+    <string name="delete_room">Delete Room</string>
+
+
+    <string name="schedule">Schedule</string>
+    <string name="timer">Timer</string>
+    <string name="remove_light">Remove Light</string>
+    <string name="look_settings">Look Settings</string>
+    <string name="lock_light">Lock Light</string>
+    <string name="schedule_light">Schedule Light</string>
+    <string name="pin_light">Pin Light</string>
+
+    <string name="roomtxt">List of rooms appear here </string>
+    <string name="voicetxt">say the name and what you want done </string>
+
+    <string name="connection_pop">This maybe because you are connected to the wrong wifi or ghost home is turned off or still booting. </string>
+    <string name="home_placeholder">Appiances of rooms added to home screen appear here for quick access. \n to add rooms go to rooms </string>
+
 </resources>

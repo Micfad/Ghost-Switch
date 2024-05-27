@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-// to save data into node ip address row
+// to save data into home ip address row
 public class HomeDatabaseUtil {
 
     public static void saveOnceIpAddressToDatabase(Context context, String homeIpAddress) {

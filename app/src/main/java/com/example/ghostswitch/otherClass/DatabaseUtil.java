@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 
-// to save data into ip address row
+// to get and save data into ip address row
 public class DatabaseUtil {
 
     public static String getIpAddressFromDatabase(Context context) {

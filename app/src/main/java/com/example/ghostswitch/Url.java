@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +26,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.io.IOException;
 import android.os.AsyncTask;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.ghostswitch.otherClass.MyDBHelper;
 
@@ -54,7 +51,7 @@ public class Url extends Fragment {
 
 
         // Initialize UI elements
-        url_errorrMsg = view.findViewById(R.id.number_error);
+        url_errorrMsg = view.findViewById(R.id.log_error);
         urlEdt = view.findViewById(R.id.Urleditext);
         nextbtn =view.findViewById(R.id.Nextbtn);
         DeviceType = view.findViewById(R.id.device_type);
@@ -216,6 +213,7 @@ public class Url extends Fragment {
                             saveIpAddressToDatabase();
 
                         }else {
+                            // if the text is from ghost home in which string will be "home"
                             if (nodeText.equals("home")) {
                                     // Navigate to another fragment
                                     //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.urlcontainer, new Node_ssid_forms()).commit();
@@ -228,7 +226,7 @@ public class Url extends Fragment {
 
 
                     }
-                }, 200); // 3000 milliseconds = 3 seconds
+                }, 200); // 200 milliseconds = 3 seconds
 
 
             }else{

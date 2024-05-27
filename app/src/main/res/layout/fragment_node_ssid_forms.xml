@@ -19,174 +19,175 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/interior" />
 
+    <TextView
+        android:id="@+id/node_msg_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/connectcontainerLY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/connectcontainerLY"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/connectcontainerLY"
-            android:layout_width="300dp"
-            android:layout_height="400dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/connectLY"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/user_passLy">
 
             <TextView
-                android:id="@+id/node_msg_error"
+                android:id="@+id/connect_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="connect"
                 android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/connectLY"
-                android:layout_width="160dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
+            <ProgressBar
+                android:id="@+id/connectprogressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/connectbtn"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/user_passLy">
-
-                <TextView
-                    android:id="@+id/connect_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="connect"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ProgressBar
-                    android:id="@+id/connectprogressBar"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/connectbtn"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/connectbtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/ripplebg"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ssidLy"
+                android:id="@+id/connectbtn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/ripplebg"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/ssid"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-
-                    android:inputType="text"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:startIconDrawable="@drawable/baseline_wifi_24"
-                    app:startIconTint="#FFFFFF">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/ssid_edtxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:ems="10"
-                        android:hint="Enter Wifi name"
-                        android:inputType="text"
-                        android:labelFor="@id/ssid"
-                        android:textColor="#FFFFFF" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ssidpassLy"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ssidLy"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ssid"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
+
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ssidLy">
+                app:startIconDrawable="@drawable/baseline_wifi_24"
+                app:startIconTint="#FFFFFF">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/ssidpass"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ssid_edtxt"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:hint="Enter Wifi name"
                     android:inputType="text"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:startIconDrawable="@drawable/baseline_wifi_password_24"
-                    app:startIconTint="#FFFFFF">
+                    android:labelFor="@id/ssid"
+                    android:textColor="#FFFFFF" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/ssidpass_editext"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:ems="10"
-                        android:hint="Enter Wifi password"
-                        android:inputType="text"
-                        android:labelFor="@id/ssidpass"
-                        android:textColor="#FFFFFF" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/user_passLy"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ssidpassLy">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/user_pass"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-
-                    android:inputType="text"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:startIconDrawable="@drawable/baseline_lock_24"
-                    app:startIconTint="#FFFFFF">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/user_pass_edtxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:ems="10"
-                        android:hint="recovery  password"
-                        android:inputType="text"
-                        android:labelFor="@id/user_pass"
-                        android:textColor="#FFFFFF" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ssidpassLy"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ssidLy">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ssidpass"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:startIconDrawable="@drawable/baseline_wifi_password_24"
+                app:startIconTint="#FFFFFF">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ssidpass_editext"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:hint="Enter Wifi password"
+                    android:inputType="text"
+                    android:labelFor="@id/ssidpass"
+                    android:textColor="#FFFFFF" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/user_passLy"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ssidpassLy">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/user_pass"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:startIconDrawable="@drawable/baseline_lock_24"
+                app:startIconTint="#FFFFFF">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/user_pass_edtxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:hint="recovery  password"
+                    android:inputType="text"
+                    android:labelFor="@id/user_pass"
+                    android:textColor="#FFFFFF" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
