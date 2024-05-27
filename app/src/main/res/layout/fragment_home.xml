@@ -170,20 +170,29 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/tranparent_reddish_ripple"
                 android:padding="10dp"
-                android:src="@drawable/baseline_keyboard_arrow_left_24"
-                android:visibility="gone" />
+                android:src="@drawable/baseline_keyboard_arrow_left_24" />
 
-            <TextView
-                android:id="@+id/home_n_display"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:ellipsize="marquee"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:paddingTop="15dp"
-                android:scrollHorizontally="true"
-                android:singleLine="true"
-                android:textAlignment="center"
-                android:textColor="#131313" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/baseBtns_card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/home_n_display"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:paddingTop="15dp"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="eeee"
+                    android:textAlignment="center"
+                    android:textColor="#131313"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/voice_cmd_"
@@ -192,7 +201,6 @@
                 android:background="@drawable/tranparent_reddish_ripple"
                 android:padding="10dp"
                 android:src="@drawable/baseline_voice_24" />
-
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

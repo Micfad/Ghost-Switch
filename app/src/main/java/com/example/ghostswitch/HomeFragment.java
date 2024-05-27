@@ -5,16 +5,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -32,6 +37,7 @@ import com.example.ghostswitch.otherClass.SwipeGestureHelper;
 import com.example.ghostswitch.otherClass.SwitchRecyclerAdapter;
 import com.example.ghostswitch.otherClass.SwitchesDataModel;
 import com.example.ghostswitch.otherClass.VoiceCommandProcessor;
+import com.example.ghostswitch.otherClass.menuAnimationUtils;
 import com.example.ghostswitch.otherClass.popup_connectn_error;
 
 import java.util.ArrayList;
@@ -42,8 +48,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView switchRecyclerView, deviceRecyclerView;
     private SwitchRecyclerAdapter switchAdapter;
     private DevicesRecyclerAdapter deviceAdapter;
-    private ConstraintLayout switchLayout, deviceLayout, pHolder;
-
+    private ConstraintLayout switchLayout, deviceLayout, pHolder, baseBtns;
     private List<SwitchesDataModel> filteredSwitches;
     private List<DevicesDataModel> filteredDevices;
     private ImageView voiceCmd, homeNext;
@@ -55,6 +60,7 @@ public class HomeFragment extends Fragment {
     private List<RoomsDataModel> roomList;
     private List<RoomsDataModel> filteredRoomList;
     private int currentRoomIndex = 0;
+    private static final int MAX_WIDTH_DP = 270;  // Define the max width in dp
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +79,26 @@ public class HomeFragment extends Fragment {
         deviceclick = view.findViewById(R.id.h_deviceView_click);
         pHolder = view.findViewById(R.id.home_placeholder);
         homeNext = view.findViewById(R.id.home_next);
+
+        baseBtns = view.findViewById(R.id.baseBtns_card);
+
+        h_displayName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not needed
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Start animation when text changes
+                animateLayout();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Not needed
+            }
+        });
 
         roomList = SampleDataGenerator.generateRoomData();
         filteredRoomList = new ArrayList<>();
@@ -151,6 +177,31 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
+    private void animateLayout() {
+        // Get current width of the layout
+        final int initialWidth = baseBtns.getWidth();
+
+        // Measure the width of the TextView with the new text content
+        h_displayName.post(new Runnable() {
+            @Override
+            public void run() {
+                // Force layout to update and measure the new width
+                h_displayName.measure(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                int measuredWidth = h_displayName.getMeasuredWidth();
+
+                // Convert max width from dp to pixels
+                int maxWidthPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, MAX_WIDTH_DP, getResources().getDisplayMetrics());
+
+                // Determine the final width, ensuring it does not exceed max width
+                int finalWidth = Math.min(measuredWidth, maxWidthPx);
+
+                // Animate width change using the menuAnimationUtils class
+                menuAnimationUtils.animateWidthChange(baseBtns, initialWidth, finalWidth, 300);
+            }
+        });
+    }
+
 
     private void showNextRoomName() {
         if (!filteredRoomList.isEmpty()) {

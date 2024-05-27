@@ -2,10 +2,31 @@ package com.example.ghostswitch.otherClass;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 public class menuAnimationUtils {
+
+
+    //animation for layout widing or retracting to text size smoothly as text is inserted
+    public static void animateWidthChange(final View view, int initialWidth, int finalWidth, long duration) {
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(initialWidth, finalWidth);
+        valueAnimator.setDuration(duration);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int animatedValue = (int) animation.getAnimatedValue();
+                ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+                layoutParams.width = animatedValue;
+                view.setLayoutParams(layoutParams);
+            }
+        });
+        valueAnimator.start();
+    }
+
 
     public static void fadeIn(View view, long duration) {
         view.setVisibility(View.VISIBLE);
