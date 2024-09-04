@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".SDB_fragment">
+    tools:context=".fragments.SDB_fragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sdb_recyclerView"

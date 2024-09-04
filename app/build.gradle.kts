@@ -63,7 +63,12 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
 
 
+
    // implementation("com.google.android.material:material:1.5.0")
+
+    //Java-WebSocket library
+    //implementation ("org.java-websocket:Java-WebSocket:1.5.2")
+
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
@@ -75,6 +80,11 @@ dependencies {
 
     //added
     implementation ("com.android.support:support-annotations:28.0.0")
+
+    //for websocket
+    implementation ("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
+
 
 
     testImplementation("junit:junit:4.13.2")

@@ -1,19 +1,14 @@
 package com.example.ghostswitch;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -23,8 +18,9 @@ import java.net.URL;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.example.ghostswitch.fragments.SwitchesFragment;
+import com.example.ghostswitch.fragments.VCFragment;
 import com.example.ghostswitch.otherClass.AudioPlayer;
-import com.example.ghostswitch.otherClass.DatabaseUtil;
 import com.example.ghostswitch.otherClass.FragmentUtils;
 
 

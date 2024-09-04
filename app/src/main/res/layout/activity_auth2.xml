@@ -4,21 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#8C0000"
     tools:context=".Auth2Activity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/pin_fragContainer"
-        android:name="com.example.ghostswitch.PinFragment"
+        android:id="@+id/loginfragAuth2Container"
+        android:name="com.example.ghostswitch.fragments.LoginFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/loginfragAuth2Container"
-        android:name="com.example.ghostswitch.LoginFragment"
+        android:id="@+id/pin_fragContainer"
+        android:name="com.example.ghostswitch.fragments.PinFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/testView"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:background="@drawable/transparent_redish_ripple_edged"
+        android:padding="20dp"
+        android:text="test"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/val_frag"
+        android:name="com.example.ghostswitch.fragments.ValidateFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

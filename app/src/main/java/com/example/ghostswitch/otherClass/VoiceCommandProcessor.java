@@ -1,5 +1,8 @@
 package com.example.ghostswitch.otherClass;
 
+import com.example.ghostswitch.data_models.DevicesDataModel;
+import com.example.ghostswitch.data_models.SwitchesDataModel;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern; // Import Pattern and Matcher classes

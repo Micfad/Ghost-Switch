@@ -8,8 +8,17 @@
     tools:context=".Connect_View" >
 
     <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView2"
+        android:name="com.example.ghostswitch.fragments.PinFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/urlcontainer"
-        android:name="com.example.ghostswitch.Url"
+        android:name="com.example.ghostswitch.fragments.Url"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,7 +28,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/ssifag"
-        android:name="com.example.ghostswitch.Node_ssid_forms"
+        android:name="com.example.ghostswitch.fragments.Node_ssid_forms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
@@ -31,10 +40,20 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/loginfragContainer"
-        android:name="com.example.ghostswitch.PinFragment"
+        android:name="com.example.ghostswitch.fragments.PinFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/passfrag"
+        android:name="com.example.ghostswitch.fragments.passwordFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

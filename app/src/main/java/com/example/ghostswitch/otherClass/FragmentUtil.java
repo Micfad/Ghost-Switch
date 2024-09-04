@@ -19,4 +19,14 @@ public class FragmentUtil {
             }
         }
     }
+
+    public static void restartFragment(Fragment fragment) {
+        if (fragment.getActivity() != null) {
+            FragmentManager fragmentManager = fragment.getActivity().getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.detach(fragment);
+            transaction.attach(fragment);
+            transaction.commit();
+        }
+    }
 }

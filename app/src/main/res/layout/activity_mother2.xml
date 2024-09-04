@@ -63,10 +63,21 @@
                         android:id="@+id/constraintLayout2"
                         android:layout_width="70dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/menubtnbg"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/h_animLY"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/menubtnbg"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <ImageView
                             android:id="@+id/imageView11"
@@ -155,10 +166,20 @@
                         android:id="@+id/constraintLayou"
                         android:layout_width="70dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/menubtnbg"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/r_animLY"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/menubtnbg"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <ImageView
                             android:id="@+id/imageVie"
@@ -169,6 +190,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/baseline_meeting_room_24" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
@@ -183,6 +205,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/constraintLayou" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -246,10 +269,20 @@
                         android:id="@+id/constrain"
                         android:layout_width="70dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/menubtnbg"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/d_animLY"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/menubtnbg"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <ImageView
 
@@ -260,6 +293,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/baseline_devices_24" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
@@ -367,7 +401,8 @@
                         android:background="@drawable/transparent_redish_ripple_edged"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent">
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -381,7 +416,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/moreContainer"
-        android:name="com.example.ghostswitch.moreFragment"
+        android:name="com.example.ghostswitch.fragments.moreFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="21dp"
@@ -391,7 +426,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/db_fragmentContainer"
-        android:name="com.example.ghostswitch.SDB_fragment"
+        android:name="com.example.ghostswitch.fragments.SDB_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0"
@@ -548,15 +583,32 @@
 
 
                     <androidx.fragment.app.FragmentContainerView
+                        android:id="@+id/n_home_fragContainer"
+                        android:name="com.example.ghostswitch.fragments.home4Nodefragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.fragment.app.FragmentContainerView
+                        android:id="@+id/node_device_frag_Container"
+                        android:name="com.example.ghostswitch.fragments.nodeDeviceFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone" />
+
+                    <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/rooms2fragmentContainer"
-                        android:name="com.example.ghostswitch.RoomsFragment2"
+                        android:name="com.example.ghostswitch.fragments.RoomsFragment2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:visibility="gone" />
 
                     <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/device_frag_Container"
-                        android:name="com.example.ghostswitch.DeviceFragment"
+                        android:name="com.example.ghostswitch.fragments.DeviceFragment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:visibility="gone"
@@ -565,16 +617,17 @@
 
                     <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/roomsContainer"
-                        android:name="com.example.ghostswitch.RoomsFragment"
+                        android:name="com.example.ghostswitch.fragments.RoomsFragment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:visibility="gone" />
 
                     <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/home_fragContainer"
-                        android:name="com.example.ghostswitch.HomeFragment"
+                        android:name="com.example.ghostswitch.fragments.HomeFragment"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -595,8 +648,6 @@
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
