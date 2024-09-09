@@ -23,8 +23,8 @@ public class New_splash extends AppCompatActivity {
             @Override
             public void run() {
 
-               IntentHelper.startActivity(New_splash.this, Auth2Activity.class, "", "", "open home lists", "pin", "splash", "","","");
-  /*
+//               IntentHelper.startActivity(New_splash.this, Auth2Activity.class, "", "", "open home lists", "pin", "splash", "","","");
+
 
                 if (!homeIpAddressManager.hasAnyData()) {
                     Intent intent = new Intent(New_splash.this, FirstActivity.class);
@@ -63,7 +63,7 @@ public class New_splash extends AppCompatActivity {
                 // Close the database
                 homeIpAddressManager.close();
 
-   */
+
 
 
             }
