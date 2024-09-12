@@ -81,13 +81,19 @@ public class nodeRecyclerViewAdapter extends RecyclerView.Adapter<nodeRecyclerVi
                 holder.roomImageView.setImageResource(R.drawable.room_kitchen);
                 break;
             case "living room":
-                holder.roomImageView.setImageResource(R.drawable.chair_);
+                holder.roomImageView.setImageResource(R.drawable.room_chair_);
                 break;
             case "bedroom":
-                holder.roomImageView.setImageResource(R.drawable.hotel_);
+                holder.roomImageView.setImageResource(R.drawable.room_hotel_);
+                break;
+            case "balcony":
+                holder.roomImageView.setImageResource(R.drawable.room_balcony);
+                break;
+            case "rest room":
+                holder.roomImageView.setImageResource(R.drawable.room_bathroom);
                 break;
             default:
-                holder.roomImageView.setImageResource(R.drawable.baseline_devices_24);
+                holder.roomImageView.setImageResource(R.drawable.baseline_meeting_room_24);
                 break;
         }
 

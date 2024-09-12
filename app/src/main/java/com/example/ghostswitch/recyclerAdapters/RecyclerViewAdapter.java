@@ -73,13 +73,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 holder.roomImageView.setImageResource(R.drawable.room_kitchen);
                 break;
             case "living room":
-                holder.roomImageView.setImageResource(R.drawable.chair_);
+                holder.roomImageView.setImageResource(R.drawable.room_chair_);
                 break;
             case "bedroom":
-                holder.roomImageView.setImageResource(R.drawable.hotel_);
+                holder.roomImageView.setImageResource(R.drawable.room_hotel_);
+                break;
+            case "balcony":
+                holder.roomImageView.setImageResource(R.drawable.room_hotel_);
+                break;
+            case "hall way":
+                holder.roomImageView.setImageResource(R.drawable.room_hotel_);
                 break;
             default:
-                holder.roomImageView.setImageResource(R.drawable.baseline_devices_24);
+                holder.roomImageView.setImageResource(R.drawable.baseline_meeting_room_24);
                 break;
         }
 

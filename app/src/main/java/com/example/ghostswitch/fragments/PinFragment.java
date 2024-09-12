@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,22 +16,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkError;
-import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.ghostswitch.Auth2Activity;
 import com.example.ghostswitch.DatabaseClasses.DefaultDBManager;
 import com.example.ghostswitch.DatabaseClasses.HomeIpAddressManager;
 import com.example.ghostswitch.MotherActivity2;
@@ -48,10 +32,6 @@ import com.example.ghostswitch.otherClass.IntentHelper;
 import com.example.ghostswitch.otherClass.PinSingleton;
 import com.example.ghostswitch.popups.sucess_popup; // Ensure this import is correct
 import com.example.ghostswitch.supportAuthActivity;
-
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PinFragment extends Fragment implements ResponseCallback {
 
@@ -174,7 +154,7 @@ public class PinFragment extends Fragment implements ResponseCallback {
 
  1. intent_room isnt strictly meant for name of rooms. its just
     an additional parameer to process with switches or devices.
-    that is when dealing strictly with rooms use objname for the room
+    So, when dealing strictly with rooms use objname for the room
       name
  2. always parse "." through intent_room just to make sure its
     not empty, except when dealing with rooms*/
@@ -196,6 +176,8 @@ public class PinFragment extends Fragment implements ResponseCallback {
                 img_indicator.setImageResource(R.drawable.ic_fan);
             } else if ("socket".equalsIgnoreCase(type)) {
                 img_indicator.setImageResource(R.drawable.ic_socket);
+            } else if (type.equalsIgnoreCase("door") ) {
+                img_indicator.setImageResource(R.drawable.baseline_meeting_room_24);
             }
 
             if (todo.equalsIgnoreCase("add") ) {
@@ -217,14 +199,37 @@ public class PinFragment extends Fragment implements ResponseCallback {
             }
 
             if (intent_room.equalsIgnoreCase("") ) {
-                    if (type.equalsIgnoreCase("bed room") ) {
-                        img_indicator.setImageResource(R.drawable.hotel_);
+                   /* if (type.equalsIgnoreCase("bed room") ) {
+                        img_indicator.setImageResource(R.drawable.room_hotel_);
                     }
                     else if (type.equalsIgnoreCase("Kitchen") ) {
                         img_indicator.setImageResource(R.drawable.room_kitchen);
-                    } else if (type.equalsIgnoreCase("door") ) {
+                    } else if (type.equalsIgnoreCase("balcony") ) {
+                        img_indicator.setImageResource(R.drawable.room_balcony);
+                    } else if (type.equalsIgnoreCase("rest room") ) {
+                        img_indicator.setImageResource(R.drawable.room_bathroom);
+                    }*/
+
+                switch (type) {
+                    case "kitchen":
+                        img_indicator.setImageResource(R.drawable.room_kitchen);
+                        break;
+                    case "living room":
+                        img_indicator.setImageResource(R.drawable.room_chair_);
+                        break;
+                    case "bedroom":
+                        img_indicator.setImageResource(R.drawable.room_hotel_);
+                        break;
+                    case "balcony":
+                        img_indicator.setImageResource(R.drawable.room_balcony);
+                        break;
+                    case "rest room":
+                        img_indicator.setImageResource(R.drawable.room_bathroom);
+                        break;
+                    default:
                         img_indicator.setImageResource(R.drawable.baseline_meeting_room_24);
-                    }
+                        break;
+                }
 
 
                 }

@@ -9,7 +9,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -47,8 +46,9 @@ public class popup_create_room {
         TextView error = popupView.findViewById(R.id.r_error);
         TextView livinRoom = popupView.findViewById(R.id.type_livingroom);
         TextView bed = popupView.findViewById(R.id.type_bedroom);
-        TextView hallway = popupView.findViewById(R.id.type_hallway);
+        TextView restRoom = popupView.findViewById(R.id.type_rest_room);
         TextView kitchen = popupView.findViewById(R.id.type_kitchen);
+        TextView balcony = popupView.findViewById(R.id.type_balcony);
         TextView others = popupView.findViewById(R.id.r_type_others);
         CardView card = popupView.findViewById(R.id.r_r_card);
         ConstraintLayout cardLy = popupView.findViewById(R.id.r_cardLy);
@@ -82,11 +82,11 @@ public class popup_create_room {
                 .start();
 
 
-        livinRoom.setOnClickListener(v -> handleTextViewClick(v, cardLy, livinRoom, bed, kitchen, hallway, others));
-        bed.setOnClickListener(v -> handleTextViewClick(v, cardLy, livinRoom, bed, kitchen, hallway, others));
-        kitchen.setOnClickListener(v -> handleTextViewClick(v, cardLy, livinRoom, bed, kitchen, hallway, others));
-        hallway.setOnClickListener(v -> handleTextViewClick(v, cardLy, livinRoom, bed, kitchen, hallway, others));
-        others.setOnClickListener(v -> handleTextViewClick(v, cardLy, livinRoom, bed, kitchen, hallway, others));
+        livinRoom.setOnClickListener(v -> handleTextViewClick(v, cardLy, livinRoom, bed, kitchen, restRoom,balcony, others));
+        bed.setOnClickListener(v -> handleTextViewClick(v, cardLy, livinRoom, bed, kitchen, restRoom,balcony, others));
+        kitchen.setOnClickListener(v -> handleTextViewClick(v, cardLy, livinRoom, bed, kitchen, restRoom,balcony, others));
+        restRoom.setOnClickListener(v -> handleTextViewClick(v, cardLy, livinRoom, bed, kitchen, restRoom,balcony, others));
+        others.setOnClickListener(v -> handleTextViewClick(v, cardLy, livinRoom, bed, kitchen, restRoom,balcony, others));
 
         // Dismiss the popup with fade-out animation
         submit.setOnClickListener(v -> popupView.animate()
@@ -105,7 +105,7 @@ public class popup_create_room {
                 .start());
     }
 
-    private static void handleTextViewClick(View view, ConstraintLayout cardLy, TextView livinRoom, TextView bed, TextView kitchen, TextView hallway, TextView others) {
+    private static void handleTextViewClick(View view, ConstraintLayout cardLy, TextView livinRoom, TextView bed, TextView kitchen, TextView restRoom,TextView balcony, TextView others) {
         if (cardLy != null) {
             cardLy.setVisibility(View.GONE);
         }
@@ -119,8 +119,10 @@ public class popup_create_room {
             selectedText = bed.getText().toString();
         } else if (viewId == R.id.type_kitchen && kitchen != null) {
             selectedText = kitchen.getText().toString();
-        } else if (viewId == R.id.type_hallway && hallway != null) {
-            selectedText = hallway.getText().toString();
+        } else if (viewId == R.id.type_rest_room && restRoom != null) {
+            selectedText = restRoom.getText().toString();
+        }else if (viewId == R.id.type_balcony && balcony != null) {
+            selectedText = balcony.getText().toString();
         } else if (viewId == R.id.r_type_others && others != null) {
             selectedText = others.getText().toString();
         }

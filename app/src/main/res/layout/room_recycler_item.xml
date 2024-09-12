@@ -56,7 +56,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/room_kitchen" />
+                app:srcCompat="@drawable/room_chair_" />
 
             <TextView
                 android:id="@+id/room_indicator_txt"

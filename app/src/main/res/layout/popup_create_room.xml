@@ -86,7 +86,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/r_r_card"
             android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_height="350dp"
             android:backgroundTint="#FFFFFF"
             android:visibility="gone"
             app:cardCornerRadius="3dp"
@@ -170,13 +170,13 @@
                     android:background="@drawable/border_bottom_gray">
 
                     <TextView
-                        android:id="@+id/type_hallway"
+                        android:id="@+id/type_balcony"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/transparent_redish_ripple_edged"
                         android:paddingTop="17dp"
-                        android:text="hall way"
+                        android:text="Balcony"
                         android:textAlignment="center"
                         android:textColor="#4C0404"
                         android:textSize="16sp"
@@ -189,6 +189,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="58dp"
                     android:background="@drawable/border_bottom_gray">
+
+                    <TextView
+                        android:id="@+id/type_rest_room"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/transparent_redish_ripple_edged"
+                        android:paddingTop="17dp"
+                        android:text="Rest room"
+                        android:textAlignment="center"
+                        android:textColor="#4C0404"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp">
 
                     <TextView
                         android:id="@+id/r_type_others"

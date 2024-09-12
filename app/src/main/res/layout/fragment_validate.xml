@@ -396,7 +396,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/chair_" />
+            app:srcCompat="@drawable/room_chair_" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
