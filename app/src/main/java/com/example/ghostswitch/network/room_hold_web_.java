@@ -45,6 +45,7 @@ public class room_hold_web_ {
                         PinSingleton pinSingleton = PinSingleton.getInstance();
                         pinSingleton.clearInstanceData();
                         pinSingleton.clearInstanceData2();
+                        pinSingleton.setPinPass(pin);
 
                         // Navigate to another activity after a delay
                         new Handler().postDelayed(new Runnable() {

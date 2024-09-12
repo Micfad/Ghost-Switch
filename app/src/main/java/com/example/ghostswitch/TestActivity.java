@@ -1,165 +1,84 @@
 package com.example.ghostswitch;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.ghostswitch.DatabaseClasses.HomeIpAddressManager;
-import com.example.ghostswitch.DatabaseClasses.RsDBManager;
-import com.example.ghostswitch.network.CheckNode;
-import com.example.ghostswitch.network.FetchNodeDataTask;
-import com.example.ghostswitch.popups.popup_connection_error;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-public class TestActivity extends AppCompatActivity implements FetchNodeDataTask.FetchNodeDataCallback {
-
-    private HomeIpAddressManager homeIpAddressManager;
-    private Context context;
-    private Handler handler;
-    private Runnable checkIpRunnable;
-
-    private Button button;
-    private Button clearall;
-    private TextView msg;
-    private TextView msg2;
-    private RsDBManager rsDBManager; // Add this field
+public class TestActivity extends AppCompatActivity {
 
     private static final String TAG = "TestActivity";
+
+    // ESP32 HTTP URL (use ESP32's IP address here)
+    private static final String ESP32_HTTP_URL = "http://192.168.4.1/schedule";  // Replace with your ESP32 IP
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-        context = this; // Initialize context
-        homeIpAddressManager = new HomeIpAddressManager(context); // Initialize HomeIpAddressManager
-        homeIpAddressManager.open(); // Open the database
+        // Allow networking operations on the main thread for simplicity
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
-        // Initialize RsDBManager
-        rsDBManager = new RsDBManager(context);
-        rsDBManager.open(); // Open the database
-
-        button = findViewById(R.id.button);
-        clearall = findViewById(R.id.clear);
-        msg = findViewById(R.id.test_txtmsg);
-        msg2 = findViewById(R.id.textView6);
-
-        handler = new Handler();
-        checkIpRunnable = new Runnable() {
-            @Override
-            public void run() {
-                checkIpAddress();
-                handler.postDelayed(this, 5000); // Repeat every 5 seconds
-            }
-        };
-        handler.post(checkIpRunnable);
-
-        button.setOnClickListener(new View.OnClickListener() {
+        // Setup the button to send data
+        Button sendDataButton = findViewById(R.id.button);
+        sendDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // handleDatabaseInsert(); Uncomment and implement this method if needed
+                // Example time data to send
+                String time1 = "08:10:00";
+                String time2 = "07:12:00";
+                String todo1 = "off";
+                String todo2 = "on";
+                String daily = "0";
+                String tag = "rel_1";  // Example for relay 1
+
+                // Send the schedule data to ESP32 using HTTP POST
+                sendScheduleToESP32(time1, time2, todo1, todo2, daily, tag);
             }
         });
+    }
 
-        clearall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleDatabaseClear();
+    private void sendScheduleToESP32(String time1, String time2, String todo1, String todo2, String daily, String tag) {
+        try {
+            // Create URL object for the HTTP POST request
+            URL url = new URL(ESP32_HTTP_URL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Set up the HTTP request
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+            // Prepare the POST data (URL-encoded form data)
+            String postData = "time1=" + time1 + "&time2=" + time2 + "&todo1=" + todo1 + "&todo2=" + todo2
+                    + "&daily=" + daily + "&tag=" + tag;
+
+            // Send data
+            OutputStream os = connection.getOutputStream();
+            os.write(postData.getBytes());
+            os.flush();
+            os.close();
+
+            // Check the response code
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                runOnUiThread(() -> Toast.makeText(TestActivity.this, "Schedule updated", Toast.LENGTH_SHORT).show());
+            } else {
+                runOnUiThread(() -> Toast.makeText(TestActivity.this, "Error: " + responseCode, Toast.LENGTH_SHORT).show());
             }
-        });
 
-        // Delay execution by 1000 milliseconds
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (!isFinishing() && !isDestroyed()) {
-                    // Retrieve all home data from the database and display it
-                    String homeDataString = homeIpAddressManager.getAllHomesAsString();
-                    msg.setText(homeDataString);
-                }
-            }
-        }, 1000);
-    }
-
-    private void handleDatabaseClear() {
-        homeIpAddressManager.deleteAllHomes(); // Clear all data
-        showPopup("All data cleared");
-
-        // Clear all room data
-        String deleteRoomsResult = rsDBManager.deleteAllRooms();
-        if ("deleted_all".equals(deleteRoomsResult)) {
-            showPopup("All data cleared, including rooms.");
-        } else {
-            showPopup("All home data cleared, no rooms found.");
-        }
-
-    }
-
-    private void showPopup(String message) {
-        if (!isFinishing() && !isDestroyed()) {
-            popup_connection_error.showPopup(context, message);
+        } catch (Exception e) {
+            Log.e(TAG, "Error sending schedule to ESP32", e);
+            runOnUiThread(() -> Toast.makeText(TestActivity.this, "Error sending schedule", Toast.LENGTH_SHORT).show());
         }
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        handler.removeCallbacks(checkIpRunnable);
-        homeIpAddressManager.close(); // Close the database
-        rsDBManager.close(); // Close the RsDBManager database
-    }
-
-    private void checkIpAddress() {
-        String activeHomeIpAddress = homeIpAddressManager.getActiveHomeIpAddress();
-        if (activeHomeIpAddress != null) {
-            Log.d(TAG, "Checking IP: " + activeHomeIpAddress);
-            CheckNode.checkIpAddress(activeHomeIpAddress, new CheckNode.ResponseCallback() {
-                @Override
-                public void onResponse(boolean success) {
-                    Log.d(TAG, "Response success: " + success);
-                    if (success) {
-                        button.setVisibility(View.GONE);
-                        fetchNodeData(activeHomeIpAddress);
-                    } else {
-                        button.setVisibility(View.VISIBLE);
-                    }
-                }
-            });
-        } else {
-            Log.d(TAG, "No active IP address found.");
-            button.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void fetchNodeData(String ipAddress) {
-        FetchNodeDataTask fetchNodeDataTask = new FetchNodeDataTask(context, this);
-        fetchNodeDataTask.setGatewayIp(ipAddress);
-        fetchNodeDataTask.execute();
-    }
-
-    @Override
-    public void onFetchNodeData(String status, String type, String node_type, String version, String n, String mac, String current_network, String ssid, String password, String gatewayIp) {
-        String data = "Status: " + status +
-                "\nType: " + type +
-                "\nNode Type: " + node_type +
-                "\nVersion: " + version +
-                "\nMAC: " + mac +
-                "\nCurrent Network: " + current_network +
-                "\nSSID: " + ssid +
-                "\nPassword: " + password +
-                "\nGateway IP: " + gatewayIp;
-        msg2.setText(data);
-    }
-
-    // Existing code..
-
-    @Override
-    public void onFetchNodeDataError(String error) {
-        msg2.setText("Error: " + error);
-    }
-
 }

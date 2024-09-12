@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -33,102 +32,64 @@ import com.example.ghostswitch.otherClass.MyViewModel;
 import com.example.ghostswitch.otherClass.MyViewModelFactory;
 import com.example.ghostswitch.otherClass.NodeVoiceCommandProcessor;
 import com.example.ghostswitch.otherClass.PinSingleton;
+import com.example.ghostswitch.otherClass.guestVoiceCommandProcessor;
 import com.example.ghostswitch.popups.PopupUtil;
-import com.example.ghostswitch.data_models.nodeData_m;
+import com.example.ghostswitch.data_models.SwitchesSinglesDataModel;
 import com.example.ghostswitch.network.SendRequestTask;
 import com.example.ghostswitch.recyclerAdapters.NodeSwitchesRecycAdapter;
-import com.example.ghostswitch.data_models.SwitchesSinglesDataModel;
 import com.example.ghostswitch.animationClass.menuAnimationUtils;
 import com.example.ghostswitch.popups.popup_connection_error;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class home4Nodefragment extends Fragment {
+public class guestfragment extends Fragment {
 
-    private RecyclerView switchRecyclerView;
+    private RecyclerView g_switchRecyclerView;
     private NodeSwitchesRecycAdapter switchAdapter;
-    private ConstraintLayout switchLayout, pHolder, baseBtns;
+    private ConstraintLayout g_switchLayout, g_pHolder, g_baseBtns;
     private List<SwitchesSinglesDataModel> switchesList;
     private List<SwitchesSinglesDataModel> filteredSwitches;
-    private ImageView voiceCmd, homeNext;
-    private TextView h_displayName;
+    private ImageView g_voiceCmd;
     private static final int SPEECH_REQUEST_CODE = 123;
     private SendRequestTask sendRequestTask;
     private Context context;
+    private TextView g_displayName;
 
-    private List<nodeData_m> roomList;
-    private List<nodeData_m> filteredRoomList;
-    private RsDBManager rsDBManager;
     private HomeIpAddressManager homeIpAddressManager;
 
     private MyViewModel myViewModel;
 
-    private int currentRoomIndex = 0;
     private static final int MAX_WIDTH_DP = 270;
 
-    private boolean isViewVisible = false;
 
     private RequestQueue requestQueue;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home4_nodefragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_guest, container, false);
         context = getContext();
 
         // Initialize the RequestQueue
         requestQueue = Volley.newRequestQueue(context);
 
-        voiceCmd = view.findViewById(R.id.h_node_voice_cmd_);
-        h_displayName = view.findViewById(R.id.h_node_home_n_display);
+        g_voiceCmd = view.findViewById(R.id.g_h_node_voice_cmd_);
 
-        switchRecyclerView = view.findViewById(R.id.h_node_h_switch_recycler_view);
-        pHolder = view.findViewById(R.id.h_node_home_placeholder);
-        homeNext = view.findViewById(R.id.h_node_home_next);
-        baseBtns = view.findViewById(R.id.h_node_baseBtns_card);
-
-        h_displayName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                animateLayout();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {}
-        });
+        g_switchRecyclerView = view.findViewById(R.id.g_h_node_h_switch_recycler_view);
+        g_displayName = view.findViewById(R.id.g_h_node_home_n_display);
+        g_baseBtns = view.findViewById(R.id.g_h_node_baseBtns_card);
 
         // Initialize HomeIpAddressManager and open the connection
         homeIpAddressManager = new HomeIpAddressManager(getContext());
         homeIpAddressManager.open();
 
+        g_displayName.setText(homeIpAddressManager.getActiveHomeName());
+        g_displayName.setSelected(true); // Enable marquee effect
+
         // Create the ViewModelFactory and pass the HomeIpAddressManager instance
         MyViewModelFactory factory = new MyViewModelFactory(homeIpAddressManager);
         myViewModel = new ViewModelProvider(this, factory).get(MyViewModel.class);
-
-        rsDBManager = new RsDBManager(context);
-        rsDBManager.open();
-
-        roomList = rsDBManager.getAllRs();
-        filteredRoomList = new ArrayList<>();
-        for (nodeData_m room : roomList) {
-            if (room.getPinned() != 0) {
-                filteredRoomList.add(room);
-                homeNext.setVisibility(View.VISIBLE);
-                pHolder.setVisibility(View.GONE);
-            }
-        }
-        rsDBManager.close();
-
-        if (!filteredRoomList.isEmpty()) {
-            h_displayName.setText(filteredRoomList.get(currentRoomIndex).getN());
-            setupRoomData();
-        }
-
-        homeNext.setOnClickListener(v -> showNextRoomName());
 
         sendRequestTask = new SendRequestTask(context, message -> {
             Log.d("SendRequestTask", "Request completed with message: " + message);
@@ -140,7 +101,7 @@ public class home4Nodefragment extends Fragment {
             }
         });
 
-        voiceCmd.setOnClickListener(v -> startVoiceRecognition());
+        g_voiceCmd.setOnClickListener(v -> startVoiceRecognition());
 
         myViewModel.getSwitchData().observe(getViewLifecycleOwner(), allSwitches -> {
             Log.d("SwitchData", "Received switch data: " + allSwitches);
@@ -157,40 +118,22 @@ public class home4Nodefragment extends Fragment {
     }
 
     private void animateLayout() {
-        final int initialWidth = baseBtns.getWidth();
-        h_displayName.post(() -> {
-            h_displayName.measure(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            int measuredWidth = h_displayName.getMeasuredWidth();
+        final int initialWidth = g_baseBtns.getWidth();
+        g_baseBtns.post(() -> {
+            g_displayName.measure(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            int measuredWidth = g_baseBtns.getMeasuredWidth();
             int maxWidthPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, MAX_WIDTH_DP, getResources().getDisplayMetrics());
             int finalWidth = Math.min(measuredWidth, maxWidthPx);
-            menuAnimationUtils.animateWidthChange(baseBtns, initialWidth, finalWidth, 300);
+            menuAnimationUtils.animateWidthChange(g_baseBtns, initialWidth, finalWidth, 300);
         });
     }
 
-    private void showNextRoomName() {
-        if (!filteredRoomList.isEmpty()) {
-            currentRoomIndex = (currentRoomIndex + 1) % filteredRoomList.size();
-            h_displayName.setText(filteredRoomList.get(currentRoomIndex).getN());
-            setupRoomData();
-        }
-    }
-
-    private void setupRoomData() {
-        filteredSwitches = getFilteredSwitchData(myViewModel.getSwitchData().getValue());
-        if (!filteredSwitches.isEmpty()) {
-            switchRecyclerView.setVisibility(View.VISIBLE);
-        }
-        setupSwitchRecyclerView(filteredSwitches);
-    }
 
     private List<SwitchesSinglesDataModel> getFilteredSwitchData(List<SwitchesSinglesDataModel> allSwitches) {
         List<SwitchesSinglesDataModel> filteredSwitches = new ArrayList<>();
         if (allSwitches != null) {
             for (SwitchesSinglesDataModel switchData : allSwitches) {
-                Log.d("Filtering", "Comparing " + h_displayName.getText().toString() + " with " + switchData.getRoomtag());
-                if (h_displayName.getText().toString().equals(switchData.getRoomtag())) {
-                    filteredSwitches.add(switchData);
-                }
+                filteredSwitches.add(switchData);
             }
         }
         return filteredSwitches;
@@ -199,8 +142,8 @@ public class home4Nodefragment extends Fragment {
     private void setupSwitchRecyclerView(List<SwitchesSinglesDataModel> switchData) {
         Log.d("RecyclerView", "Filtered switches size: " + filteredSwitches.size());
         switchAdapter = new NodeSwitchesRecycAdapter(getContext(), switchData);
-        switchRecyclerView.setAdapter(switchAdapter);
-        switchRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        g_switchRecyclerView.setAdapter(switchAdapter);
+        g_switchRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
     }
 
     private void startVoiceRecognition() {
@@ -226,13 +169,11 @@ public class home4Nodefragment extends Fragment {
         homeIpAddressManager.open();
         String ipAddress = homeIpAddressManager.getActiveHomeIpAddress();
 
-        // Pass the room name, recognized text, request queue, and IP address to NodeVoiceCommandProcessor
-        String roomName = h_displayName.getText().toString();
-
         // Get the list of switches from ViewModel
         List<SwitchesSinglesDataModel> switchesList = myViewModel.getSwitchData().getValue();
 
-        NodeVoiceCommandProcessor.Result result = NodeVoiceCommandProcessor.processVoiceCommand(roomName, recognizedText, requestQueue, ipAddress, switchesList, switchAdapter);
+        guestVoiceCommandProcessor.Result result = guestVoiceCommandProcessor.processVoiceCommand(recognizedText, requestQueue, ipAddress, switchesList, switchAdapter);
+
 
         String stringName = result.getName();
         String stringState = result.getState();
@@ -257,15 +198,11 @@ public class home4Nodefragment extends Fragment {
                 AudioPlayer.playAudioTwo(requireContext());
                 PopupUtil.showCustomPopup(context, stringName + " is " + stringState);
             }
-
-            // sendRequestTask.execute(stringName, stringState);
         }
 
         // Close the database after the operation
         homeIpAddressManager.close();
     }
-
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -277,20 +214,5 @@ public class home4Nodefragment extends Fragment {
             }
         }
     }
-
-   /* @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (homeIpAddressManager != null) {
-            homeIpAddressManager.close();
-        }
-        if (rsDBManager != null) {
-            rsDBManager.close(); // Close the database after fetching rooms
-        }
-
-        // Additional cleanup if needed
-    }*/
-
-
 
 }

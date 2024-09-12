@@ -35,13 +35,13 @@ public class NodeVoiceCommandProcessor {
         }
     }
 
-    // Modified processVoiceCommand method to accept IP address as a parameter
-    public static Result processVoiceCommand(String roomName, String command, RequestQueue requestQueue, String ipAddress, List<SwitchesSinglesDataModel> switchesList) {
+    // Modified processVoiceCommand method to accept IP address and adapter as parameters
+    public static Result processVoiceCommand(String roomName, String command, RequestQueue requestQueue, String ipAddress, List<SwitchesSinglesDataModel> switchesList, NodeSwitchesRecycAdapter n_adapter) {
         if (switchesList == null || switchesList.isEmpty()) {
             return new Result("none", "", "");
         }
 
-        // Declare processedCounter and totalSwitches here
+        // Declare processedCounter and totalSwitches
         int[] processedCounter = {0}; // Use an array to allow modification inside inner classes
         int totalSwitches = (int) switchesList.stream().filter(switchData -> switchData.getRoomtag().equalsIgnoreCase(roomName)).count();
 
@@ -53,7 +53,6 @@ public class NodeVoiceCommandProcessor {
                 SwitchesSinglesDataModel switchData = switchesList.get(i);
                 if (switchData.getRoomtag().equalsIgnoreCase(roomName)) {
                     String switchName = switchData.getName().toLowerCase();
-                    String switchType = switchData.getSwitchType();
                     String switchTag = switchData.getSwitchTag();
                     String activeID = switchData.getActiveStatusID();
                     String inactiveID = switchData.getInActiveStatusID();
@@ -84,8 +83,15 @@ public class NodeVoiceCommandProcessor {
                         formSubmission.submitForm(switchTag, finalState, new FormSubmission.FormSubmissionCallback() {
                             @Override
                             public void onSuccess(String response) {
+                                // Update the switch state in the data model
+                                switchData.setActiveStatus(finalState);
 
-
+                                // Increment processedCounter and refresh RecyclerView if done
+                                processedCounter[0]++;
+                                if (processedCounter[0] == totalSwitches) {
+                                    // Once all switches are processed, refresh the entire RecyclerView
+                                    n_adapter.notifyDataSetChanged();
+                                }
                             }
 
                             @Override
@@ -137,6 +143,8 @@ public class NodeVoiceCommandProcessor {
                         public void onSuccess(String response) {
                             // Update the data model to reflect the new state
                             switchData.setActiveStatus(state);
+                            // Refresh the RecyclerView once all switches are processed
+                            n_adapter.notifyDataSetChanged();
                         }
 
                         @Override
@@ -152,6 +160,4 @@ public class NodeVoiceCommandProcessor {
 
         return new Result("No match found", "", "");
     }
-
-
 }

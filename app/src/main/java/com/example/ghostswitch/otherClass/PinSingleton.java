@@ -5,7 +5,8 @@ public class PinSingleton {
     private static PinSingleton instance;
     private String pinPass;
     private String instanceData;  // Existing field for instance_data
-    private String instanceData2; // New field for instance_data2
+    private String instanceData2; // Existing field for instance_data2
+    private String guestInstance; // New field for guestInstance
 
     // Private constructor to prevent instantiation
     private PinSingleton() {
@@ -62,5 +63,20 @@ public class PinSingleton {
     // Method to clear the instanceData2
     public void clearInstanceData2() {
         this.instanceData2 = null;
+    }
+
+    // Method to set the guestInstance
+    public void setGuestInstance(String guestInstance) {
+        this.guestInstance = guestInstance;
+    }
+
+    // Method to get the guestInstance
+    public String getGuestInstance() {
+        return guestInstance;
+    }
+
+    // Method to clear the guestInstance
+    public void clearGuestInstance() {
+        this.guestInstance = null;
     }
 }

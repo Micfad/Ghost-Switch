@@ -106,6 +106,7 @@ public class generate_pin {
                     public void onAnimationEnd(Animator animation) {
                             String gen_pin = "";
                         pinSingleton.setInstanceData(gen_pin);
+                        pinSingleton.setInstanceData2("1");
                             // popupView.setVisibility(View.GONE);
                             // popupWindow.dismiss();
                             IntentHelper.startActivity(context, Auth2Activity.class, name, type, todo, "pin","", "", tags, ip);
@@ -123,6 +124,7 @@ public class generate_pin {
                         String gen_pin = input.getText().toString();
                         // Set values
                         pinSingleton.setInstanceData(gen_pin);
+                        pinSingleton.setInstanceData2("1");
                         new Handler().postDelayed(() -> {
                             // popupView.setVisibility(View.GONE);
                             // popupWindow.dismiss();

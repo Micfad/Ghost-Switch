@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.ghostswitch.DatabaseClasses.HomeIpAddressManager;
 import com.example.ghostswitch.data_models.SwitchesSinglesDataModel;
+import com.example.ghostswitch.otherClass.PinSingleton;
 
 import org.json.JSONObject;
 
@@ -29,7 +30,18 @@ public class RelayStateTask extends AsyncTask<Void, Void, List<SwitchesSinglesDa
     @Override
     protected List<SwitchesSinglesDataModel> doInBackground(Void... voids) {
         homeIpAddressManager.open();
-        String SERVER_URL = "http://" + homeIpAddressManager.getActiveHomeIpAddress() + "/switches_api";
+
+        // Check the guestInstance value in PinSingleton to determine which endpoint to use
+        String guestInstance = PinSingleton.getInstance().getGuestInstance();
+        String SERVER_URL;
+        if ("1".equals(guestInstance)) {
+            SERVER_URL = "http://" + homeIpAddressManager.getActiveHomeIpAddress() + "/guest_api";
+            Log.d(TAG, "Using /guest_api endpoint");
+        } else {
+            SERVER_URL = "http://" + homeIpAddressManager.getActiveHomeIpAddress() + "/switches_api";
+            Log.d(TAG, "Using /switches_api endpoint");
+        }
+
         homeIpAddressManager.close();
 
         List<SwitchesSinglesDataModel> switchesList = new ArrayList<>();
@@ -121,7 +133,6 @@ public class RelayStateTask extends AsyncTask<Void, Void, List<SwitchesSinglesDa
                 Log.d(TAG, "Switch Type: " + switchData.getSwitchType());
                 Log.d(TAG, "Active Status ID: " + switchData.getActiveStatusID());
                 Log.d(TAG, "InActive Status ID: " + switchData.getInActiveStatusID());
-                // Removed inActiveStatus log
             }
         } else {
             Log.d(TAG, "No relay states received or error parsing the data");

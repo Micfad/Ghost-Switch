@@ -33,6 +33,8 @@ import com.example.ghostswitch.DatabaseClasses.HomeIpAddressManager;
 import com.example.ghostswitch.DatabaseClasses.RsDBManager;
 import com.example.ghostswitch.MotherActivity2;
 import com.example.ghostswitch.R;
+import com.example.ghostswitch.SelectRoomActivity;
+import com.example.ghostswitch.TimerActivity2;
 import com.example.ghostswitch.data_models.SwitchesSinglesDataModel;
 import com.example.ghostswitch.otherClass.IntentHelper;
 import com.example.ghostswitch.otherClass.PinSingleton;
@@ -56,6 +58,17 @@ public class NodeSwitchesRecycAdapter extends RecyclerView.Adapter<NodeSwitchesR
         this.mInflater = LayoutInflater.from(context);
         this.switchList = data;
         this.context = context;
+    }
+
+    // Method to update a specific item in the list based on position
+    public void updateSwitchItem(int position, String newStatus) {
+        if (position >= 0 && position < switchList.size()) {
+            // Update the status of the switch at the given position
+            SwitchesSinglesDataModel switchItem = switchList.get(position);
+            switchItem.setActiveStatus(newStatus);
+            // Notify the adapter that the item has changed
+            notifyItemChanged(position);
+        }
     }
 
     // inflates the row layout from xml when needed
@@ -326,6 +339,8 @@ public class NodeSwitchesRecycAdapter extends RecyclerView.Adapter<NodeSwitchesR
             menuTimer.setOnClickListener(v -> {
                 // u might need to use RTC module this feature i important make it only available in Ghostsingles
                         //   AreYouPopupUtil.showTimerPopupPin(context, switchName, roomtag, type);
+
+                IntentHelper.startActivity(context, TimerActivity2.class, switchName, switchType, "timer","timer", "", "",switchTag,ipAddress);
             });
 
 

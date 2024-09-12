@@ -163,6 +163,7 @@ public class ValidateFragment extends Fragment {
         if(activeType != null){
             if(activeType.equalsIgnoreCase("node")){
                 val_loginnav.setVisibility(View.GONE);
+                PinSingleton.getInstance().clearGuestInstance();
             }
         } else {
             // Handle the null case
@@ -391,6 +392,7 @@ public class ValidateFragment extends Fragment {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            PinSingleton.getInstance().setGuestInstance("1");
                             val_ProgLY.setVisibility(View.GONE);
                             IntentHelper.startActivity(context, MotherActivity3.class, "", "", pinpass, "", "Auth2", "","","");
 

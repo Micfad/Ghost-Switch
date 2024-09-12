@@ -14,10 +14,10 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.ghostswitch.MotherActivity2;
+import com.example.ghostswitch.MotherActivity3; // Import MotherActivity3 or other activities as needed
 import com.example.ghostswitch.R;
 
 public class PopupUtil {
-
 
     public static void showCustomPopup(Context context, String message) {
         View popupView = LayoutInflater.from(context).inflate(R.layout.feedbac_popup_, null);
@@ -36,9 +36,18 @@ public class PopupUtil {
         // Set animation programmatically
         animatePopupIn(popupView);
 
-        // Show the popup at the top center of the screen
-        popupWindow.showAtLocation(((MotherActivity2) context).getWindow().getDecorView(),
-                Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
+        // Safely cast the context to the correct activity
+        View rootView = null;
+        if (context instanceof MotherActivity2) {
+            rootView = ((MotherActivity2) context).getWindow().getDecorView();
+        } else if (context instanceof MotherActivity3) {
+            rootView = ((MotherActivity3) context).getWindow().getDecorView();
+        }
+
+        if (rootView != null) {
+            // Show the popup at the top center of the screen
+            popupWindow.showAtLocation(rootView, Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
+        }
 
         // Dismiss the popup after 2 seconds if no user interaction
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
@@ -66,7 +75,6 @@ public class PopupUtil {
         });
         animator.start();
     }
-
 
     private static void animatePopupIn(final View view) {
         ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f);
