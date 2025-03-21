@@ -131,17 +131,19 @@ public class popup_wifi_load {
                     nFragment.setArguments(bundle);
 
                     // Ensure the container is visible
-                    View nodeFormFrag = activity.findViewById(R.id.ssifag);
+/*
                     View urlFormFrag = activity.findViewById(R.id.urlcontainer);
                     if (urlFormFrag != null) {
                         urlFormFrag.setVisibility(View.VISIBLE);
-                        nodeFormFrag.setVisibility(View.GONE);
+
                     }
 
                     // Begin the fragment transaction
                     FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.urlcontainer, nFragment);
                     transaction.commit();
+
+ */
                 }
             }
         });

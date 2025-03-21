@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".fragments.Node_ssid_forms">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Node_forms_activity">
 
 
     <ImageView
@@ -234,7 +234,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/n_card"
-            android:layout_width="250dp"
+            android:layout_width="260dp"
             android:layout_height="300dp"
             android:backgroundTint="#FFFFFF"
             app:cardCornerRadius="3dp"
@@ -257,28 +257,17 @@
                     android:background="@drawable/border_bottom_gray">
 
                     <TextView
-                        android:id="@+id/textView19"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/promptxt"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
-                        android:text="@string/promthed"
-                        android:textColor="#949494"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView38" />
-
-                    <TextView
-                        android:id="@+id/promptxt"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
                         android:text="@string/promttxt"
                         android:textAlignment="center"
                         android:textColor="#474747"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                        app:layout_constraintTop_toBottomOf="@+id/imageView38" />
 
                     <ImageView
                         android:id="@+id/imageView38"
@@ -304,7 +293,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/transparent_redish_ripple_edged"
                         android:paddingTop="30dp"
-                        android:text="Next"
+                        android:text="Done"
                         android:textAlignment="center"
                         android:textColor="#2C2C2C"
                         android:textSize="16sp"

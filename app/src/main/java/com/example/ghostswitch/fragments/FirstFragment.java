@@ -1,7 +1,6 @@
 package com.example.ghostswitch.fragments;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.ghostswitch.Connect_View;
 import com.example.ghostswitch.R;
+import com.example.ghostswitch.otherClass.IntentHelper;
 
 public class FirstFragment extends Fragment {
 
@@ -39,17 +39,12 @@ public class FirstFragment extends Fragment {
                     requestPermissions(new String[]{Manifest.permission.ACCESS_WIFI_STATE}, REQUEST_ACCESS_WIFI_STATE);
                 } else {
                     // Permission is already granted, proceed with your functionality
-                    startConnectViewActivity();
+                    IntentHelper.startActivity(getContext(), Connect_View.class, "", "", "add_new", "", "firstFragment", "", "", "");
                 }
             }
         });
 
         return view;
-    }
-
-    private void startConnectViewActivity() {
-        Intent i = new Intent(getActivity(), Connect_View.class);
-        startActivity(i);
     }
 
     @Override
@@ -58,16 +53,13 @@ public class FirstFragment extends Fragment {
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_ACCESS_WIFI_STATE) {
-            // If request is cancelled, the result arrays are empty.
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission was granted, proceed with your functionality
-                startConnectViewActivity();
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                IntentHelper.startActivity(getContext(), Connect_View.class, "", "", "", "", "firstFragment", "", "", "");
             } else {
                 // Permission denied, show a message to the user or handle it gracefully
                 // For now, we'll just start the activity even if permission is denied
                 // In a real app, you might want to show an explanation or limit functionality
-                startConnectViewActivity();
+                //IntentHelper.startActivity(getContext(), Connect_View.class, "", "", "", "", "", "", "", "");
             }
         }
     }

@@ -5,6 +5,9 @@
     <string name="string_one">Enter your smart home wifi credentials</string>
     <string name="string_two"></string>
 
+    <string name="promthed">MAC Address:</string>
+    <string name="promttxt">loading MAC</string>
+
     <string name="rename_type">Rename</string>
     <string name="add_Switches">Add Switches</string>
     <string name="add_To_Home">Add To Home</string>

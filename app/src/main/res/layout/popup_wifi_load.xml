@@ -82,7 +82,6 @@
         android:layout_height="match_parent"
         android:background="#FFFFFF"
         android:elevation="20dp"
-        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

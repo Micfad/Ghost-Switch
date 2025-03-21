@@ -16,7 +16,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.ghostswitch.R;
-import com.example.ghostswitch.fragments.Node_ssid_forms;
 import com.example.ghostswitch.fragments.passwordFragment;
 
 public class directOrRouter {
@@ -65,7 +64,6 @@ public class directOrRouter {
                     receivingFragment.setArguments(bundle);
 
                     // Ensure the container is visible
-                    View nodeFormFrag = fragmentActivity.findViewById(R.id.ssifag);
                     View passFrag = fragmentActivity.findViewById(R.id.passfrag);
 
                     if (passFrag != null) {

@@ -17,28 +17,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/urlcontainer"
-        android:name="com.example.ghostswitch.fragments.Url"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/ssifag"
-        android:name="com.example.ghostswitch.fragments.Node_ssid_forms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_node_ssid_forms" />
-
-    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/loginfragContainer"
         android:name="com.example.ghostswitch.fragments.PinFragment"
         android:layout_width="match_parent"

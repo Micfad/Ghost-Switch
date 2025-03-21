@@ -255,6 +255,7 @@ public class passwordFragment extends Fragment {
     }
 
     public void backto() {
+        /*
         if (context instanceof FragmentActivity) {
             FragmentActivity fragmentActivity = (FragmentActivity) context;
             Url nFragment = new Url();
@@ -263,21 +264,20 @@ public class passwordFragment extends Fragment {
 
             nFragment.setArguments(bundle);
 
-            View nodessidfrag = fragmentActivity.findViewById(R.id.ssifag);
             View passFrag = fragmentActivity.findViewById(R.id.passfrag);
             View url = fragmentActivity.findViewById(R.id.urlcontainer);
 
             if (url != null) {
-                url.setVisibility(View.VISIBLE);
+                //url.setVisibility(View.VISIBLE);
                 passFrag.setVisibility(View.GONE);
-                nodessidfrag.setVisibility(View.GONE);
             }
 
-            FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.urlcontainer, nFragment);
+            FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();transaction.replace(R.id.urlcontainer, nFragment);
             transaction.addToBackStack(null);
             transaction.commit();
         }
+
+         */
     }
 
     private String getGatewayIpAddress() {
